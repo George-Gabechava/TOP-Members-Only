@@ -46,6 +46,8 @@ async function postSignUp(req, res, next) {
   }
 }
 
+// Secret Membership Page
+
 module.exports = {
   validateSignUp,
   postSignUp,
