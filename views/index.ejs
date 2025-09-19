@@ -29,18 +29,38 @@
     <% } %>
 
     <!-- Log In Attempt Messages -->
-    <% if (messages && messages.length > 0) { %>
-    <div class="error"><%= messages[messages.length - 1] %></div>
-    <% } %>
+    <% if (loginFeedback && loginFeedback.length > 0) { %>
+    <div class="error"><%= loginFeedback[0] %></div>
+    <% } %> <% console.log("messages",messages); %>
 
-    <!-- If logged in, show log out button-->
+    <!-- If logged in, show log out button and add message button-->
     <% if (user) { %>
     <form action="/logOut" method="get">
       <button type="submit">Log Out</button>
     </form>
+    <form action="addMessage" method="post">
+      <button type="submit">Create Message</button>
+    </form>
     <% } %>
 
-    <!-- Add a way to see member messages if member -->
+    <!-- Show all messages, but only reveal author and date to members.-->
+    <h2>Messages:</h2>
+    <ul>
+      <% messages.forEach(function(message) { %>
+      <li>
+        <% if (user && user.membership_status === "true" ) { %>
+        <p>Author: <%= req.user.username %></p>
+        <p>Title: <%= message.title %></p>
+        <p>Date: <%= message.timestamp %></p>
+        <% } else {%>
+        <p>Author: [Members Only]</p>
+        <p>Title: <%= message.title %></p>
+        <p>Date: [Members Only]</p>
+        <% } %>
+        <p><%= message.text %></p>
+      </li>
+      <% }); %>
+    </ul>
 
     <!-- script -->
     <script src="/javascripts/script.js"></script>
