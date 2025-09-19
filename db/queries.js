@@ -28,4 +28,9 @@ async function addMessage(title, message, authorId, date) {
   );
 }
 
-module.exports = { createUser, getMessages, addMessage };
+// Give membership to user
+async function makeMember(userId) {
+  await pool.query("UPDATE users SET is_member = TRUE WHERE id = $1", [userId]);
+}
+
+module.exports = { createUser, getMessages, addMessage, makeMember };

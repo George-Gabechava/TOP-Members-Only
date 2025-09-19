@@ -31,15 +31,18 @@
     <!-- Log In Attempt Messages -->
     <% if (loginFeedback && loginFeedback.length > 0) { %>
     <div class="error"><%= loginFeedback[0] %></div>
-    <% } %> <% console.log("messages",messages); %>
+    <% } %>
 
-    <!-- If logged in, show log out button and add message button-->
+    <!-- If logged in, show buttons to log out, add message, & become a member-->
     <% if (user) { %>
     <form action="/logOut" method="get">
       <button type="submit">Log Out</button>
     </form>
     <form action="addMessage" method="post">
       <button type="submit">Create Message</button>
+    </form>
+    <form action="/secret" method="get">
+      <button type="submit">Membership Page</button>
     </form>
     <% } %>
 
@@ -48,8 +51,8 @@
     <ul>
       <% messages.forEach(function(message) { %>
       <li>
-        <% if (user && user.membership_status === "true" ) { %>
-        <p>Author: <%= req.user.username %></p>
+        <% if (user && user.membership_status === true ) { %>
+        <p>Author: <%= user.username %></p>
         <p>Title: <%= message.title %></p>
         <p>Date: <%= message.timestamp %></p>
         <% } else {%>

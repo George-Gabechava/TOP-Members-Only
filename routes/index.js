@@ -8,7 +8,6 @@ router.get("/", async function (req, res, next) {
     const messages = await db.getMessages();
     const loginFeedback = req.session.messages || []; // Passport message
     req.session.messages = []; // Clear passport messages
-    console.log("loginFeedback", req.session.messages);
     res.render("index", {
       title: "Members Only",
       user: req.user,
@@ -16,7 +15,6 @@ router.get("/", async function (req, res, next) {
       loginFeedback,
     });
   } catch (error) {
-    console.error("Error fetching messages:", error);
     next(error);
   }
 });

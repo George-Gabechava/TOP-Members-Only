@@ -25,7 +25,6 @@ const validateSignUp = [
 
 async function postSignUp(req, res, next) {
   const errors = validationResult(req);
-
   if (!errors.isEmpty()) {
     return res.render("signUp", { errors: errors.array() });
   }
@@ -46,9 +45,36 @@ async function postSignUp(req, res, next) {
   }
 }
 
-// Secret Membership Page
+// Secret Code Validation
+const validateSecretCode = [
+  body("secretCode")
+    .trim()
+    .equals("George")
+    .withMessage("Incorrect secret code")
+    .escape(),
+];
+
+// Membership Handler
+async function postSecretCode(req, res, next) {
+  const errors = validationResult(req);
+  console.log("Post secret code called");
+  if (!errors.isEmpty()) {
+    return res.render("secret", { user: req.user, errors: errors.array() });
+  }
+
+  try {
+    await db.giveMembership(req.user.id);
+    req.user.membership_status = true;
+    res.redirect("/");
+  } catch (error) {
+    console.error("Error in membership upgrade:", error);
+    next(error);
+  }
+}
 
 module.exports = {
   validateSignUp,
   postSignUp,
+  validateSecretCode,
+  postSecretCode,
 };
