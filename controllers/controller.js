@@ -37,9 +37,14 @@ async function postSignUp(req, res, next) {
       req.body.username,
       hashedPassword
     );
-
     res.redirect("/");
   } catch (error) {
+    // Sign Up Error if duplicate username
+    if (error.message && error.message.toLowerCase().includes("duplicate")) {
+      return res.render("signUp", {
+        errors: [{ msg: "Username already exists. Please choose another." }],
+      });
+    }
     console.error("Error in sign-up:", error);
     next(error);
   }
