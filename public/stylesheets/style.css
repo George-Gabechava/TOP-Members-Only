@@ -1,8 +1,129 @@
+/* Body Styling */
 body {
   padding: 25px;
   font: 14px "Times New Roman", Times, serif;
+  background-color: lightyellow;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 5vw;
+  margin-left: 5vw;
+}
+
+#logOutForm {
+  align-self: flex-end;
+  width: 10vw;
+  margin-right: 10vw;
 }
 
 #loginPopup {
   display: none;
+}
+
+.messageCard {
+  border: 1px solid black;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: white;
+  border-radius: 5px;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  width: 90vw;
+}
+
+h2 {
+  margin-bottom: 0px;
+}
+
+#messageArea {
+  width: 50vw;
+}
+
+button:active {
+  position: relative;
+  top: 3px;
+  background-color: whitesmoke;
+  border: solid 1px black;
+}
+
+#loginSubmitDiv {
+  margin-top: 10px;
+}
+
+/* Form Styling */
+#addMessageForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button,
+input[type="submit"] {
+  margin-bottom: 10px;
+  font-weight: bold;
+  padding: 5px;
+  width: 20vw;
+}
+
+.formRow {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+form {
+  margin-block-end: 0px;
+  margin-block-start: 5px;
+}
+
+/* Sign Up Page Styling */
+#signUpForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Secret Page Styling */
+#secretForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#signUpButton {
+  margin-top: 10px;
+}
+
+#adminCheckbox {
+  display: flex;
+  align-items: center;
+}
+
+input[type="checkbox"] {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#secretForm button {
+  margin-bottom: 15vh;
+}
+
+/* Footer */
+footer {
+  margin-top: auto;
+  text-align: center;
+}
+
+ul {
+  padding-left: 0;
 }

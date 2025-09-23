@@ -20,10 +20,13 @@
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required />
         <label for="password">Password:</label>
+
         <input type="password" id="password" name="password" required />
-        <button type="submit">Log In</button>
-        <!-- Cancel Button-->
-        <button type="button" id="closeButton">Cancel</button>
+        <div id="loginSubmitDiv">
+          <!-- Submit & Cancel Buttons -->
+          <button type="submit">Next</button>
+          <button type="button" id="closeButton">Cancel</button>
+        </div>
       </form>
     </div>
     <% } %>
@@ -35,13 +38,18 @@
 
     <!-- If logged in, show buttons to log out, add message, & become a member-->
     <% if (user) { %>
-    <form action="/logOut" method="get">
+    <form id="logOutForm" action="/logOut" method="get">
       <button type="submit">Log Out</button>
     </form>
-    <form action="addMessage" method="post">
+    <form id="addMessageForm" action="addMessage" method="post">
       <input type="text" name="title" placeholder="Title" required />
       <br />
-      <textarea name="text" placeholder="Message" required></textarea>
+      <textarea
+        id="messageArea"
+        name="text"
+        placeholder="Message"
+        required
+      ></textarea>
       <br />
       <button type="submit">Submit Message</button>
     </form>
@@ -54,19 +62,19 @@
     <h2>Messages:</h2>
     <ul>
       <% messages.forEach(function(message) { %>
-      <li>
+      <li class="messageCard">
         <% if (user && user.membership_status === true ) { %>
-        <p>Author: <%= message.username %></p>
-        <p>Title: <%= message.title %></p>
-        <p>Date: <%= message.timestamp %></p>
+        <p><strong>Title:</strong> <%= message.title %></p>
+        <p><%= message.text %></p>
+        <p><strong>Author:</strong> <%= message.username %></p>
+        <p><strong>Date:</strong> <%= message.timestamp %></p>
         <!-- Allow Admins to delete messages -->
         <% } else {%>
-        <p>Author: [Members Only]</p>
-        <p>Title: <%= message.title %></p>
-        <p>Date: [Members Only]</p>
-        <% } %>
+        <p><strong>Title:</strong> <%= message.title %></p>
         <p><%= message.text %></p>
-        <% if (user && user.admin_status === true) { %>
+        <p><strong>Author:</strong> [Members Only]</p>
+        <p><strong>Date:</strong> [Members Only]</p>
+        <% } %> <% if (user && user.admin_status === true) { %>
         <form action="/deleteMessage/<%= message.id %>" method="post">
           <button type="submit">Delete</button>
         </form>

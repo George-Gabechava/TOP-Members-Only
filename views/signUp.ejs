@@ -3,13 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <title>Sign Up</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
     <h1>Sign Up</h1>
     <form action="/" method="get">
       <button type="submit">Back to Home</button>
     </form>
-    <form action="/signUp" method="POST">
+    <form id="signUpForm" action="/signUp" method="POST">
       <label for="firstName">First Name</label>
       <input id="firstName" name="firstName" type="text" />
       <label for="lastName">Last Name</label>
@@ -21,8 +22,16 @@
       <!-- Confirm password -->
       <label for="confirmPassword">Confirm Password</label>
       <input id="confirmPassword" name="confirmPassword" type="password" />
-      <button type="submit">Sign Up</button>
+      <button id="signUpButton" type="submit">Sign Up</button>
     </form>
+
+    <% if (errors && errors.length > 0) { %>
+    <ul class="error">
+      <% errors.forEach(function(error) { %>
+      <h3><%= error.msg %></h3>
+      <% }); %>
+    </ul>
+    <% } %>
 
     <!-- Footer -->
     <%- include('footer'); %>
