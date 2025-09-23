@@ -63,7 +63,7 @@ async function postSecretCode(req, res, next) {
   }
 
   try {
-    await db.giveMembership(req.user.id);
+    await db.makeMember(req.user.id);
     req.user.membership_status = true;
     res.redirect("/");
   } catch (error) {

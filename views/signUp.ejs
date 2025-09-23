@@ -6,10 +6,13 @@
   </head>
   <body>
     <h1>Sign Up</h1>
+    <form action="/" method="get">
+      <button type="submit">Back to Home</button>
+    </form>
     <form action="/signUp" method="POST">
-      <label for="firstName">first name</label>
+      <label for="firstName">First Name</label>
       <input id="firstName" name="firstName" type="text" />
-      <label for="lastName">last name</label>
+      <label for="lastName">Last Name</label>
       <input id="lastName" name="lastName" type="text" />
       <label for="username">Username</label>
       <input id="username" name="username" type="text" />
@@ -20,5 +23,8 @@
       <input id="confirmPassword" name="confirmPassword" type="password" />
       <button type="submit">Sign Up</button>
     </form>
+
+    <!-- Footer -->
+    <%- include('footer'); %>
   </body>
 </html>

@@ -9,7 +9,7 @@ router.get("/", async function (req, res, next) {
     const loginFeedback = req.session.messages || []; // Passport message
     req.session.messages = []; // Clear passport messages
     res.render("index", {
-      title: "Members Only",
+      title: "Members Only Club",
       user: req.user,
       messages: messages || [],
       loginFeedback,
@@ -22,7 +22,7 @@ router.get("/", async function (req, res, next) {
 // GET membership page
 router.get("/secret", function (req, res, next) {
   if (req.isAuthenticated()) {
-    res.render("secret", { user: req.user });
+    res.render("secret", { user: req.user, errors: [] });
   } else {
     res.redirect("/");
   }
@@ -41,12 +41,7 @@ router.get("/logOut", function (req, res, next) {
 // Add message, then render index
 router.post("/addMessage", async function (req, res, next) {
   try {
-    await db.addMessage(
-      req.body.title,
-      req.body.message,
-      req.user.id,
-      new Date()
-    );
+    await db.addMessage(req.body.title, req.body.text, req.user.id, new Date());
     res.redirect("/");
   } catch (error) {
     console.error("Error adding message:", error);

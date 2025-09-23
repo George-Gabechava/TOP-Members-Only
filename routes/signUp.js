@@ -6,10 +6,6 @@ const controller = require("../controllers/controller");
 // Sign Up form
 router.get("/signUp", (req, res) => res.render("signUp", { errors: [] }));
 
-router.post(
-  "/signUp",
-  controller.validateSecretCode,
-  controller.postSecretCode
-);
+router.post("/signUp", controller.validateSignUp, controller.postSignUp);
 
 module.exports = router;

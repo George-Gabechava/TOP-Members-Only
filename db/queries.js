@@ -21,16 +21,18 @@ async function getMessages() {
 }
 
 // Add Message Handler
-async function addMessage(title, message, authorId, date) {
+async function addMessage(title, text, authorId, date) {
   await pool.query(
     "INSERT INTO messages (title, text, user_id, timestamp) VALUES ($1, $2, $3, $4)",
-    [title, message, authorId, date]
+    [title, text, authorId, date]
   );
 }
 
 // Give membership to user
 async function makeMember(userId) {
-  await pool.query("UPDATE users SET is_member = TRUE WHERE id = $1", [userId]);
+  await pool.query("UPDATE users SET membership_status = TRUE WHERE id = $1", [
+    userId,
+  ]);
 }
 
 module.exports = { createUser, getMessages, addMessage, makeMember };
