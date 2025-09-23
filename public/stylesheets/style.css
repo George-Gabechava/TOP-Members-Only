@@ -11,16 +11,6 @@ body {
   margin-left: 5vw;
 }
 
-#logOutForm {
-  align-self: flex-end;
-  width: 10vw;
-  margin-right: 10vw;
-}
-
-#loginPopup {
-  display: none;
-}
-
 .messageCard {
   border: 1px solid black;
   padding: 10px;
@@ -43,18 +33,21 @@ h2 {
   width: 50vw;
 }
 
-button:active {
-  position: relative;
-  top: 3px;
-  background-color: whitesmoke;
-  border: solid 1px black;
+/* Form Styling */
+#logOutForm {
+  align-self: flex-end;
+  width: 10vw;
+  margin-right: 10vw;
+}
+
+#loginPopup {
+  display: none;
 }
 
 #loginSubmitDiv {
   margin-top: 10px;
 }
 
-/* Form Styling */
 #addMessageForm {
   display: flex;
   flex-direction: column;
@@ -85,11 +78,31 @@ form {
   margin-block-start: 5px;
 }
 
+#loggedInButtons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
 /* Sign Up Page Styling */
 #signUpForm {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.backHomeButton {
+  width: 10vw;
+  margin-bottom: 10px;
+  margin-right: 10vw;
+}
+
+.backHomeForm {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
 }
 
 /* Secret Page Styling */
