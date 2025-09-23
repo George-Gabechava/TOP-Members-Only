@@ -12,7 +12,7 @@ async function createUser(firstName, lastName, username, hashedPassword) {
 // Get all messages
 async function getMessages() {
   const { rows } = await pool.query(
-    `SELECT messages.title, messages.text, messages.timestamp, users.username
+    `SELECT messages.id, messages.title, messages.text, messages.timestamp, users.username
      FROM messages
      JOIN users ON messages.user_id = users.id
      ORDER BY messages.timestamp DESC`
@@ -35,4 +35,23 @@ async function makeMember(userId) {
   ]);
 }
 
-module.exports = { createUser, getMessages, addMessage, makeMember };
+// Give admin to user
+async function makeAdmin(userId) {
+  await pool.query("UPDATE users SET admin_status = TRUE WHERE id = $1", [
+    userId,
+  ]);
+}
+
+// Delete message by ID
+async function deleteMessage(messageId) {
+  await pool.query("DELETE FROM messages WHERE id = $1", [messageId]);
+}
+
+module.exports = {
+  createUser,
+  getMessages,
+  addMessage,
+  makeMember,
+  makeAdmin,
+  deleteMessage,
+};

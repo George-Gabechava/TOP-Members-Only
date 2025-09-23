@@ -54,15 +54,21 @@ const validateSecretCode = [
     .escape(),
 ];
 
-// Membership Handler
+// Secret Code Handler
 async function postSecretCode(req, res, next) {
   const errors = validationResult(req);
-  console.log("Post secret code called");
   if (!errors.isEmpty()) {
     return res.render("secret", { user: req.user, errors: errors.array() });
   }
 
   try {
+    // If admin checkbox is checked, give admin_status
+    if (req.body.adminStatus === "on") {
+      await db.makeAdmin(req.user.id);
+      req.user.admin_status = true;
+    }
+
+    // Give membership_status
     await db.makeMember(req.user.id);
     req.user.membership_status = true;
     res.redirect("/");

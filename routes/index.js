@@ -49,4 +49,15 @@ router.post("/addMessage", async function (req, res, next) {
   }
 });
 
+// Delete message
+router.post("/deleteMessage/:id", async function (req, res, next) {
+  try {
+    await db.deleteMessage(req.params.id);
+    res.redirect("/");
+  } catch (error) {
+    console.error("Error deleting message:", error);
+    next(error);
+  }
+});
+
 module.exports = router;

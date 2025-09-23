@@ -59,12 +59,18 @@
         <p>Author: <%= message.username %></p>
         <p>Title: <%= message.title %></p>
         <p>Date: <%= message.timestamp %></p>
+        <!-- Allow Admins to delete messages -->
         <% } else {%>
         <p>Author: [Members Only]</p>
         <p>Title: <%= message.title %></p>
         <p>Date: [Members Only]</p>
         <% } %>
         <p><%= message.text %></p>
+        <% if (user && user.admin_status === true) { %>
+        <form action="/deleteMessage/<%= message.id %>" method="post">
+          <button type="submit">Delete</button>
+        </form>
+        <% } %>
       </li>
       <% }); %>
     </ul>
