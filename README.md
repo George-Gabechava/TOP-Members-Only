@@ -4,6 +4,6 @@ An exclusive clubhouse app where members can write anonymous posts. Non-members 
 
 This project uses authentication and PostgreSQL to manage users and messages.
 
-Site link:
+Site link: https://top-members-only-production-12e9.up.railway.app/
 
 Assignment Link: https://www.theodinproject.com/lessons/node-path-nodejs-members-only
