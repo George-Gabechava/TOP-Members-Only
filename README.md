@@ -6,4 +6,11 @@ This project uses authentication and PostgreSQL to manage users and messages.
 
 Site link: https://top-members-only-production-12e9.up.railway.app/
 
+<p align="center">
+  <img 
+    src="./membersOnly.png" 
+    alt="App Screenshot" 
+  >
+</p>
+
 Assignment Link: https://www.theodinproject.com/lessons/node-path-nodejs-members-only
