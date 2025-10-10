@@ -1,10 +1,8 @@
-// controllers/controller.js
-const pool = require("../db/pool");
-const db = require("../db/queries");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
+const db = require("../db/queries");
 
-// Sign Up Validation
+// Validation middleware
 const validateSignUp = [
   body("firstName").trim().escape(),
   body("lastName").trim().escape(),
@@ -23,6 +21,10 @@ const validateSignUp = [
     .withMessage("Passwords do not match"),
 ];
 
+function getSignUpPage(req, res) {
+  res.render("signUp", { errors: [] });
+}
+
 async function postSignUp(req, res, next) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -39,7 +41,6 @@ async function postSignUp(req, res, next) {
     );
     res.redirect("/");
   } catch (error) {
-    // Sign Up Error if duplicate username
     if (error.message && error.message.toLowerCase().includes("duplicate")) {
       return res.render("signUp", {
         errors: [{ msg: "Username already exists. Please choose another." }],
@@ -50,42 +51,4 @@ async function postSignUp(req, res, next) {
   }
 }
 
-// Secret Code Validation
-const validateSecretCode = [
-  body("secretCode")
-    .trim()
-    .equals("George")
-    .withMessage("Incorrect secret code")
-    .escape(),
-];
-
-// Secret Code Handler
-async function postSecretCode(req, res, next) {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.render("secret", { user: req.user, errors: errors.array() });
-  }
-
-  try {
-    // If admin checkbox is checked, give admin_status
-    if (req.body.adminStatus === "on") {
-      await db.makeAdmin(req.user.id);
-      req.user.admin_status = true;
-    }
-
-    // Give membership_status
-    await db.makeMember(req.user.id);
-    req.user.membership_status = true;
-    res.redirect("/");
-  } catch (error) {
-    console.error("Error in membership upgrade:", error);
-    next(error);
-  }
-}
-
-module.exports = {
-  validateSignUp,
-  postSignUp,
-  validateSecretCode,
-  postSecretCode,
-};
+module.exports = { getSignUpPage, postSignUp, validateSignUp };

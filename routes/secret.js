@@ -1,17 +1,16 @@
 // routes/secret.js
 const express = require("express");
 const router = express.Router();
-const controller = require("../controllers/controller");
+const secretController = require("../controllers/secretController");
 
-// Membership page
-router.get("/secret", (req, res) =>
-  res.render("secret", { user: req.user, errors: [] })
-);
+// GET secret page
+router.get("/secret", secretController.getSecretPage);
 
+// POST secret code
 router.post(
   "/secret",
-  controller.validateSecretCode,
-  controller.postSecretCode
+  secretController.validateSecretCode,
+  secretController.postSecretCode
 );
 
 module.exports = router;
