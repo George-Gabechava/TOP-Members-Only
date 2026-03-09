@@ -1,10 +1,16 @@
+# TOP‑Members‑Only
+
 The secret code to enter the club is "George" (case sensitive).
 
-An exclusive clubhouse app where members can write anonymous posts. Non-members can't see who the author was of each message nor the date of each message. Admins can delete posts.
+A role-based messaging app where members can publish anonymous posts. Non-members see limited message details. Admins can moderate content through protected actions posts.
 
 This project uses authentication and PostgreSQL to manage users and messages.
 
-Site link: https://top-members-only-production-12e9.up.railway.app/
+---
+
+**Site link:** https://top-members-only-production-12e9.up.railway.app/
+
+---
 
 <p align="center">
   <img 
@@ -13,4 +19,31 @@ Site link: https://top-members-only-production-12e9.up.railway.app/
   >
 </p>
 
-Assignment Link: https://www.theodinproject.com/lessons/node-path-nodejs-members-only
+---
+
+## Secret Club Code
+
+To become a member, you’ll need the secret code:
+
+**George** (case sensitive)
+
+---
+
+## Features
+
+- **Authentication (Sessions + Passport):** Users sign in to make comments and become members.
+- **Role-based access control**
+  - Non‑members: limited message details
+  - Members: can view author + timestamp
+  - Admins: can delete posts
+- **PostgreSQL** persistence for users + messages
+
+---
+
+## Tech Stack
+
+- Node.js
+- Express
+- EJS
+- PostgreSQL
+- Passport
