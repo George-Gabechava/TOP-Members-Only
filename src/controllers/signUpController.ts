@@ -1,9 +1,9 @@
-const { body, validationResult } = require("express-validator");
-const bcrypt = require("bcryptjs");
-const db = require("../db/queries");
+import { Request, Response, NextFunction } from "express";
+import { body, validationResult } from "express-validator";
+import bcrypt from "bcryptjs";
+import * as db from "../db/queries";
 
-// Validation middleware
-const validateSignUp = [
+export const validateSignUp = [
   body("firstName").trim().escape(),
   body("lastName").trim().escape(),
   body("username")
@@ -21,11 +21,15 @@ const validateSignUp = [
     .withMessage("Passwords do not match"),
 ];
 
-function getSignUpPage(req, res) {
+export function getSignUpPage(req: Request, res: Response) {
   res.render("signUp", { errors: [] });
 }
 
-async function postSignUp(req, res, next) {
+export async function postSignUp(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.render("signUp", { errors: errors.array() });
@@ -37,10 +41,10 @@ async function postSignUp(req, res, next) {
       req.body.firstName,
       req.body.lastName,
       req.body.username,
-      hashedPassword
+      hashedPassword,
     );
     res.redirect("/");
-  } catch (error) {
+  } catch (error: any) {
     if (error.message && error.message.toLowerCase().includes("duplicate")) {
       return res.render("signUp", {
         errors: [{ msg: "Username already exists. Please choose another." }],
@@ -50,5 +54,3 @@ async function postSignUp(req, res, next) {
     next(error);
   }
 }
-
-module.exports = { getSignUpPage, postSignUp, validateSignUp };

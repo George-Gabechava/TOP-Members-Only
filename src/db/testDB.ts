@@ -1,4 +1,5 @@
-const pool = require("./pool");
+import pool from "./pool";
+
 pool
   .query("SELECT current_database()")
   .then((res) => {

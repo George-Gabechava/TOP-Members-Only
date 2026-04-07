@@ -15,7 +15,7 @@
     <!-- If not logged in, show login button-->
     <% } %> <% if (!user) { %>
     <button id="loginButton">Log In</button>
-    <div id="loginPopup">
+    <div id="loginPopup" <% if (loginFeedback && loginFeedback.length > 0) { %>style="display: block"<% } %>>
       <form action="/logIn" method="post" id="loginForm">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required />

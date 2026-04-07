@@ -42,8 +42,10 @@ To become a member, you’ll need the secret code:
 
 ## Tech Stack
 
-- Node.js
-- Express
-- EJS
-- PostgreSQL
-- Passport
+| Layer          | Technology               |
+| -------------- | ------------------------ |
+| Back-end       | Node.js, Express         |
+| Front-end      | EJS                      |
+| Database       | PostgreSQL               |
+| Authentication | Passport (session‑based) |
+| Language       | TypeScript               |

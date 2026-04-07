@@ -1,57 +1,51 @@
-// db/queries.js
-const pool = require("./pool");
+import pool from "./pool";
 
-// Sign Up Handler
-async function createUser(firstName, lastName, username, hashedPassword) {
+export async function createUser(
+  firstName: string,
+  lastName: string,
+  username: string,
+  hashedPassword: string,
+): Promise<void> {
   await pool.query(
     "INSERT INTO users (first_name, last_name, username, password) VALUES ($1, $2, $3, $4)",
-    [firstName, lastName, username, hashedPassword]
+    [firstName, lastName, username, hashedPassword],
   );
 }
 
-// Get all messages
-async function getMessages() {
+export async function getMessages() {
   const { rows } = await pool.query(
     `SELECT messages.id, messages.title, messages.text, messages.timestamp, users.username
      FROM messages
      JOIN users ON messages.user_id = users.id
-     ORDER BY messages.timestamp DESC`
+     ORDER BY messages.timestamp DESC`,
   );
   return rows;
 }
 
-// Add Message Handler
-async function addMessage(title, text, authorId, date) {
+export async function addMessage(
+  title: string,
+  text: string,
+  authorId: number,
+  date: Date,
+): Promise<void> {
   await pool.query(
     "INSERT INTO messages (title, text, user_id, timestamp) VALUES ($1, $2, $3, $4)",
-    [title, text, authorId, date]
+    [title, text, authorId, date],
   );
 }
 
-// Give membership to user
-async function makeMember(userId) {
+export async function makeMember(userId: number): Promise<void> {
   await pool.query("UPDATE users SET membership_status = TRUE WHERE id = $1", [
     userId,
   ]);
 }
 
-// Give admin to user
-async function makeAdmin(userId) {
+export async function makeAdmin(userId: number): Promise<void> {
   await pool.query("UPDATE users SET admin_status = TRUE WHERE id = $1", [
     userId,
   ]);
 }
 
-// Delete message by ID
-async function deleteMessage(messageId) {
+export async function deleteMessage(messageId: string): Promise<void> {
   await pool.query("DELETE FROM messages WHERE id = $1", [messageId]);
 }
-
-module.exports = {
-  createUser,
-  getMessages,
-  addMessage,
-  makeMember,
-  makeAdmin,
-  deleteMessage,
-};

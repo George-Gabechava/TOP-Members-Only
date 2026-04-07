@@ -1,6 +1,11 @@
-const db = require("../db/queries");
+import { Request, Response, NextFunction } from "express";
+import * as db from "../db/queries";
 
-async function getHomePage(req, res, next) {
+export async function getHomePage(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   try {
     const messages = await db.getMessages();
     const loginFeedback = req.session.messages || [];
@@ -16,9 +21,18 @@ async function getHomePage(req, res, next) {
   }
 }
 
-async function addMessage(req, res, next) {
+export async function addMessage(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   try {
-    await db.addMessage(req.body.title, req.body.text, req.user.id, new Date());
+    await db.addMessage(
+      req.body.title,
+      req.body.text,
+      req.user!.id,
+      new Date(),
+    );
     res.redirect("/");
   } catch (error) {
     console.error("Error adding message:", error);
@@ -26,7 +40,11 @@ async function addMessage(req, res, next) {
   }
 }
 
-async function deleteMessage(req, res, next) {
+export async function deleteMessage(
+  req: Request<{ id: string }>,
+  res: Response,
+  next: NextFunction,
+) {
   try {
     await db.deleteMessage(req.params.id);
     res.redirect("/");
@@ -36,7 +54,7 @@ async function deleteMessage(req, res, next) {
   }
 }
 
-function logOut(req, res, next) {
+export function logOut(req: Request, res: Response, next: NextFunction) {
   req.logout(function (err) {
     if (err) {
       return next(err);
@@ -44,10 +62,3 @@ function logOut(req, res, next) {
     res.redirect("/");
   });
 }
-
-module.exports = {
-  getHomePage,
-  addMessage,
-  deleteMessage,
-  logOut,
-};

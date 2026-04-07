@@ -44,6 +44,13 @@ h2 {
   display: none;
 }
 
+.error {
+  color: red;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
 #loginSubmitDiv {
   margin-top: 10px;
 }

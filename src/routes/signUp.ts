@@ -1,7 +1,7 @@
-// routes/signUp.js
-const express = require("express");
+import express from "express";
+import * as signUpController from "../controllers/signUpController";
+
 const router = express.Router();
-const signUpController = require("../controllers/signUpController");
 
 // Sign Up form
 router.get("/signUp", signUpController.getSignUpPage);
@@ -10,7 +10,7 @@ router.get("/signUp", signUpController.getSignUpPage);
 router.post(
   "/signUp",
   signUpController.validateSignUp,
-  signUpController.postSignUp
+  signUpController.postSignUp,
 );
 
-module.exports = router;
+export default router;

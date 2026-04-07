@@ -1,8 +1,6 @@
-// populateUsers.js
-require("dotenv").config();
-const pool = require("./pool");
+import "dotenv/config";
+import pool from "./pool";
 
-// Example users
 const somePeople = [
   {
     first_name: "John",
@@ -34,7 +32,7 @@ async function populateUsers() {
           item.password,
           item.membership_status,
           item.admin_status,
-        ]
+        ],
       );
     }
     console.log("users Database populated!");

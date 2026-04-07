@@ -1,7 +1,7 @@
-// routes/secret.js
-const express = require("express");
+import express from "express";
+import * as secretController from "../controllers/secretController";
+
 const router = express.Router();
-const secretController = require("../controllers/secretController");
 
 // GET secret page
 router.get("/secret", secretController.getSecretPage);
@@ -10,7 +10,7 @@ router.get("/secret", secretController.getSecretPage);
 router.post(
   "/secret",
   secretController.validateSecretCode,
-  secretController.postSecretCode
+  secretController.postSecretCode,
 );
 
-module.exports = router;
+export default router;
